@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LuckyRoll</title>
+
+<title>Will You? 💗</title>
 
 <style>
 * {
@@ -12,257 +13,108 @@
 
 body {
     margin: 0;
+    height: 100vh;
+    overflow: hidden;
     font-family: Arial, sans-serif;
-    background:
-        radial-gradient(circle at top, #26345f 0%, #11152b 45%, #080a14 100%);
-    color: white;
-    min-height: 100vh;
-}
-
-header {
-    text-align: center;
-    padding: 28px 15px 18px;
-}
-
-.logo {
-    font-size: 38px;
-    font-weight: 900;
-}
-
-.subtitle {
-    color: #aeb8dd;
-    margin-top: 6px;
-}
-
-.container {
-    max-width: 700px;
-    margin: auto;
-    padding: 15px;
-}
-
-.panel {
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 22px;
-    padding: 20px;
-    margin-bottom: 15px;
-    backdrop-filter: blur(10px);
-}
-
-.stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
-.stat {
-    background: rgba(255,255,255,0.07);
-    border-radius: 15px;
-    padding: 14px 5px;
-    text-align: center;
-}
-
-.stat-number {
-    font-size: 22px;
-    font-weight: bold;
-}
-
-.stat-label {
-    font-size: 12px;
-    color: #aeb8dd;
-    margin-top: 4px;
-}
-
-button {
-    width: 100%;
-    border: none;
-    border-radius: 14px;
-    padding: 15px;
-    margin-top: 9px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    background: #ffffff;
-    color: #11152b;
-    transition: 0.2s;
-}
-
-button:hover {
-    transform: translateY(-2px);
-}
-
-button:active {
-    transform: scale(0.98);
-}
-
-.roll-button {
-    font-size: 20px;
-    padding: 18px;
-}
-
-.secondary {
-    background: rgba(255,255,255,0.1);
-    color: white;
-}
-
-.hidden {
-    display: none !important;
-}
-
-.result-card {
-    text-align: center;
-    min-height: 250px;
+    background: linear-gradient(135deg, #ffd6e7, #fff0f6);
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.reward-icon {
-    font-size: 75px;
-    margin-bottom: 10px;
+.container {
+    text-align: center;
+    background: rgba(255,255,255,0.85);
+    padding: 40px 25px;
+    border-radius: 25px;
+    width: min(90%, 500px);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
 }
 
-.reward-name {
-    font-size: 27px;
-    font-weight: 900;
+.heart {
+    font-size: 70px;
+    animation: heartbeat 1.2s infinite;
 }
 
-.rarity {
-    margin-top: 8px;
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.15);
+    }
+}
+
+h1 {
+    color: #d6336c;
+    font-size: 32px;
+}
+
+p {
+    color: #777;
     font-size: 17px;
+}
+
+.buttons {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+button {
+    border: none;
+    border-radius: 12px;
+    padding: 15px 30px;
+    font-size: 18px;
     font-weight: bold;
+    cursor: pointer;
 }
 
-.common {
-    color: #bfc7d9;
+#yes {
+    background: #ff4f87;
+    color: white;
 }
 
-.uncommon {
-    color: #65e6a8;
+#yes:hover {
+    transform: scale(1.08);
 }
 
-.rare {
-    color: #66a8ff;
+#no {
+    background: #ddd;
+    color: #333;
+    position: relative;
+    transition: left 0.15s, top 0.15s;
 }
 
-.epic {
-    color: #bd79ff;
+#message {
+    margin-top: 25px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #d6336c;
 }
 
-.legendary {
-    color: #ffd45c;
+.hidden {
+    display: none;
 }
 
-.mythic {
-    color: #ff72c8;
+.confetti {
+    position: fixed;
+    font-size: 25px;
+    animation: fall 3s linear forwards;
+    pointer-events: none;
 }
 
-.reveal {
-    animation: reveal 0.6s ease;
-}
-
-@keyframes reveal {
-    0% {
-        transform: scale(0.4) rotate(-8deg);
-        opacity: 0;
-    }
-
-    60% {
-        transform: scale(1.12) rotate(3deg);
-    }
-
-    100% {
-        transform: scale(1) rotate(0);
+@keyframes fall {
+    from {
+        transform: translateY(-50px) rotate(0deg);
         opacity: 1;
     }
-}
 
-.collection-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-}
-
-.item {
-    background: rgba(255,255,255,0.06);
-    border-radius: 15px;
-    padding: 13px 5px;
-    text-align: center;
-    min-height: 105px;
-}
-
-.item-icon {
-    font-size: 34px;
-}
-
-.item-name {
-    font-size: 12px;
-    margin-top: 5px;
-}
-
-.item-count {
-    font-size: 11px;
-    color: #9da8d0;
-    margin-top: 3px;
-}
-
-.locked {
-    opacity: 0.3;
-    filter: grayscale(1);
-}
-
-.progress-bar {
-    height: 12px;
-    background: rgba(255,255,255,0.1);
-    border-radius: 20px;
-    overflow: hidden;
-    margin-top: 10px;
-}
-
-.progress-fill {
-    height: 100%;
-    width: 0%;
-    background: white;
-    transition: width 0.5s;
-}
-
-.section-title {
-    margin-top: 0;
-}
-
-.message {
-    text-align: center;
-    color: #aeb8dd;
-    min-height: 22px;
-}
-
-.streak {
-    text-align: center;
-    font-size: 16px;
-    margin: 10px 0;
-}
-
-.big-streak {
-    font-size: 25px;
-    font-weight: bold;
-}
-
-.footer {
-    text-align: center;
-    color: #697398;
-    font-size: 12px;
-    padding: 15px;
-}
-
-@media (max-width: 450px) {
-    .logo {
-        font-size: 32px;
-    }
-
-    .collection-grid {
-        grid-template-columns: repeat(2, 1fr);
+    to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
     }
 }
 </style>
@@ -270,462 +122,180 @@ button:active {
 
 <body>
 
-<header>
-    <div class="logo">✨ LuckyRoll</div>
-    <div class="subtitle">Build your ultimate collection</div>
-</header>
+<div class="container" id="main">
 
-<div class="container">
+    <div class="heart">💗</div>
 
-    <!-- STATS -->
-    <div class="stats">
+    <h1>Will you be my girlfriend?</h1>
 
-        <div class="stat">
-            <div class="stat-number" id="rolls">0</div>
-            <div class="stat-label">ROLLS</div>
-        </div>
+    <p>👉 Choose wisely... 👈</p>
 
-        <div class="stat">
-            <div class="stat-number" id="bestStreak">0</div>
-            <div class="stat-label">BEST STREAK</div>
-        </div>
+    <div class="buttons">
 
-        <div class="stat">
-            <div class="stat-number" id="collectionCount">0/12</div>
-            <div class="stat-label">COLLECTION</div>
-        </div>
-
-    </div>
-
-
-    <!-- GAME -->
-    <div class="panel">
-
-        <div class="result-card" id="result">
-
-            <div class="reward-icon">🎁</div>
-
-            <div class="reward-name">
-                Ready?
-            </div>
-
-            <div class="rarity">
-                Roll to discover something new!
-            </div>
-
-        </div>
-
-        <div class="streak">
-            🔥 Streak:
-            <span class="big-streak" id="streak">0</span>
-        </div>
-
-        <button class="roll-button" onclick="roll()">
-            🎲 ROLL
+        <button id="yes" onclick="sayYes()">
+            YES 💕
         </button>
 
-        <p class="message" id="message"></p>
-
-    </div>
-
-
-    <!-- COLLECTION -->
-    <div class="panel">
-
-        <h2 class="section-title">📖 Collection</h2>
-
-        <p>
-            <span id="progressText">0</span> / 12 discovered
-        </p>
-
-        <div class="progress-bar">
-            <div class="progress-fill" id="progressFill"></div>
-        </div>
-
-        <br>
-
-        <div class="collection-grid" id="collection"></div>
-
-    </div>
-
-
-    <!-- RESET -->
-    <div class="panel">
-
-        <button class="secondary" onclick="resetGame()">
-            ♻️ Reset Progress
+        <button id="no">
+            NO 😭
         </button>
 
     </div>
 
-    <div class="footer">
-        LuckyRoll • Your collection is saved on this device
-    </div>
+    <div id="message"></div>
+
+</div>
+
+
+<div class="container hidden" id="success">
+
+    <div class="heart">🥰</div>
+
+    <h1>YAY!!! 💕</h1>
+
+    <p>You said yes! 🎉</p>
 
 </div>
 
 
 <script>
 
-/* =========================
-   REWARDS
-========================= */
+const noButton = document.getElementById("no");
 
-const rewards = [
+let attempts = 0;
 
-    {
-        name: "Tiny Star",
-        icon: "⭐",
-        rarity: "Common",
-        className: "common",
-        weight: 35
-    },
 
-    {
-        name: "Blue Crystal",
-        icon: "💎",
-        rarity: "Common",
-        className: "common",
-        weight: 25
-    },
+/* Make the button dodge the mouse */
+noButton.addEventListener("mouseenter", dodge);
 
-    {
-        name: "Lucky Leaf",
-        icon: "🍀",
-        rarity: "Uncommon",
-        className: "uncommon",
-        weight: 16
-    },
 
-    {
-        name: "Golden Coin",
-        icon: "🪙",
-        rarity: "Uncommon",
-        className: "uncommon",
-        weight: 10
-    },
+/* Also works with touch */
+noButton.addEventListener("touchstart", function(event) {
+    event.preventDefault();
+    dodge();
+});
 
-    {
-        name: "Magic Orb",
-        icon: "🔮",
-        rarity: "Rare",
-        className: "rare",
-        weight: 6
-    },
 
-    {
-        name: "Ice Crown",
-        icon: "👑",
-        rarity: "Rare",
-        className: "rare",
-        weight: 3
-    },
+function dodge() {
 
-    {
-        name: "Phoenix",
-        icon: "🔥",
-        rarity: "Epic",
-        className: "epic",
-        weight: 2
-    },
+    attempts++;
 
-    {
-        name: "Moon Dragon",
-        icon: "🐉",
-        rarity: "Epic",
-        className: "epic",
-        weight: 1.3
-    },
+    /*
+       After several dodges, let the person
+       actually choose NO.
+    */
+    if (attempts >= 6) {
 
-    {
-        name: "Galaxy Core",
-        icon: "🌌",
-        rarity: "Legendary",
-        className: "legendary",
-        weight: 0.5
-    },
+        noButton.innerText = "Okay... NO 😭";
 
-    {
-        name: "Cosmic Crown",
-        icon: "👑",
-        rarity: "Legendary",
-        className: "legendary",
-        weight: 0.2
-    },
+        noButton.style.position = "static";
 
-    {
-        name: "Void Dragon",
-        icon: "🐲",
-        rarity: "Mythic",
-        className: "mythic",
-        weight: 0.1
-    },
+        noButton.onclick = sayNo;
 
-    {
-        name: "Infinity",
-        icon: "♾️",
-        rarity: "Mythic",
-        className: "mythic",
-        weight: 0.05
+        return;
     }
 
-];
-
-
-/* =========================
-   SAVE DATA
-========================= */
-
-let data = JSON.parse(
-    localStorage.getItem("luckyRollData")
-) || {
-
-    rolls: 0,
-    streak: 0,
-    bestStreak: 0,
-    collection: {}
-
-};
-
-
-/* =========================
-   SAVE
-========================= */
-
-function save() {
-
-    localStorage.setItem(
-        "luckyRollData",
-        JSON.stringify(data)
-    );
-
-}
-
-
-/* =========================
-   PICK RANDOM REWARD
-========================= */
-
-function pickReward() {
-
-    let total = rewards.reduce(
-        (sum, reward) => sum + reward.weight,
-        0
-    );
-
-    let random = Math.random() * total;
-
-    for (let reward of rewards) {
-
-        random -= reward.weight;
-
-        if (random <= 0) {
-            return reward;
-        }
-
-    }
-
-    return rewards[0];
-
-}
-
-
-/* =========================
-   ROLL
-========================= */
-
-function roll() {
-
-    const button =
-        document.querySelector(".roll-button");
-
-    button.disabled = true;
-
-    const result =
-        document.getElementById("result");
-
-    result.classList.remove("reveal");
-
-    result.innerHTML = `
-        <div class="reward-icon">🎲</div>
-        <div class="reward-name">Rolling...</div>
-        <div class="rarity">✨</div>
-    `;
-
-    setTimeout(() => {
-
-        const reward = pickReward();
-
-        data.rolls++;
-
-        data.streak++;
-
-        if (data.streak > data.bestStreak) {
-            data.bestStreak = data.streak;
-        }
-
-        if (!data.collection[reward.name]) {
-            data.collection[reward.name] = 0;
-        }
-
-        data.collection[reward.name]++;
-
-        save();
-
-        result.classList.add("reveal");
-
-        result.innerHTML = `
-            <div class="reward-icon">
-                ${reward.icon}
-            </div>
-
-            <div class="reward-name">
-                ${reward.name}
-            </div>
-
-            <div class="rarity ${reward.className}">
-                ${reward.rarity}
-            </div>
-        `;
-
-        document.getElementById("message").innerText =
-            "✨ You discovered " + reward.name + "!";
-
-        update();
-
-        button.disabled = false;
-
-    }, 700);
-
-}
-
-
-/* =========================
-   UPDATE UI
-========================= */
-
-function update() {
-
-    document.getElementById("rolls").innerText =
-        data.rolls;
-
-    document.getElementById("streak").innerText =
-        data.streak;
-
-    document.getElementById("bestStreak").innerText =
-        data.bestStreak;
-
-    const discovered =
-        rewards.filter(
-            reward => data.collection[reward.name]
-        ).length;
-
-    document.getElementById("collectionCount").innerText =
-        discovered + "/12";
-
-    document.getElementById("progressText").innerText =
-        discovered;
-
-    document.getElementById("progressFill").style.width =
-        (discovered / rewards.length * 100) + "%";
-
-    renderCollection();
-
-}
-
-
-/* =========================
-   COLLECTION
-========================= */
-
-function renderCollection() {
-
-    const container =
-        document.getElementById("collection");
-
-    container.innerHTML = "";
-
-    rewards.forEach(reward => {
-
-        const count =
-            data.collection[reward.name] || 0;
-
-        const div =
-            document.createElement("div");
-
-        div.className =
-            "item" + (count === 0 ? " locked" : "");
-
-        div.innerHTML = `
-
-            <div class="item-icon">
-                ${count > 0 ? reward.icon : "❔"}
-            </div>
-
-            <div class="item-name">
-                ${count > 0 ? reward.name : "Undiscovered"}
-            </div>
-
-            <div class="item-count">
-                ${count > 0 ? "×" + count : "???"}
-            </div>
-
-        `;
-
-        container.appendChild(div);
-
-    });
-
-}
-
-
-/* =========================
-   RESET
-========================= */
-
-function resetGame() {
-
-    const confirmReset =
-        confirm(
-            "Reset your entire LuckyRoll collection?"
+    const padding = 20;
+
+    const maxX =
+        window.innerWidth -
+        noButton.offsetWidth -
+        padding;
+
+    const maxY =
+        window.innerHeight -
+        noButton.offsetHeight -
+        padding;
+
+    const x =
+        Math.max(
+            padding,
+            Math.random() * maxX
         );
 
-    if (!confirmReset) return;
+    const y =
+        Math.max(
+            padding,
+            Math.random() * maxY
+        );
 
-    data = {
-        rolls: 0,
-        streak: 0,
-        bestStreak: 0,
-        collection: {}
-    };
+    noButton.style.position = "fixed";
 
-    save();
+    noButton.style.left = x + "px";
+    noButton.style.top = y + "px";
 
-    document.getElementById("result").innerHTML = `
-        <div class="reward-icon">🎁</div>
-        <div class="reward-name">Ready?</div>
-        <div class="rarity">
-            Roll to discover something new!
-        </div>
-    `;
+    const messages = [
+        "HEY! 😭",
+        "Nice try 😂",
+        "NOPE!",
+        "You almost got me 😭",
+        "STOP CHASING ME 💀"
+    ];
 
-    document.getElementById("message").innerText = "";
+    document.getElementById("message").innerText =
+        messages[Math.floor(Math.random() * messages.length)];
+}
 
-    update();
+
+function sayYes() {
+
+    document.getElementById("main")
+        .classList.add("hidden");
+
+    document.getElementById("success")
+        .classList.remove("hidden");
+
+    createConfetti();
 
 }
 
 
-/* =========================
-   START
-========================= */
+function sayNo() {
 
-update();
+    document.getElementById("message").innerText =
+        "Okay 😭 I respect your answer.";
 
-</script>
+}
 
-</body>
-</html>
+
+function createConfetti() {
+
+    const emojis = [
+        "💗",
+        "💕",
+        "💖",
+        "✨",
+        "🎉",
+        "💝"
+    ];
+
+    for (let i = 0; i < 40; i++) {
+
+        const piece =
+            document.createElement("div");
+
+        piece.className = "confetti";
+
+        piece.innerText =
+            emojis[Math.floor(
+                Math.random() * emojis.length
+            )];
+
+        piece.style.left =
+            Math.random() * 100 + "vw";
+
+        piece.style.animationDelay =
+            Math.random() * 1.5 + "s";
+
+        document.body.appendChild(piece);
+
+        setTimeout(() => {
+            piece.remove();
+        }, 4000);
+    }
+
+}
+
 </script>
 
 </body>
