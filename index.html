@@ -1,24 +1,255 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Study Hub</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Study Hub</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f4f6fb;
+        color: #222;
+    }
+
+    header {
+        background: #222;
+        color: white;
+        text-align: center;
+        padding: 25px 15px;
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: 30px;
+    }
+
+    header p {
+        margin-bottom: 0;
+    }
+
+    .container {
+        max-width: 700px;
+        margin: auto;
+        padding: 20px;
+    }
+
+    .card {
+        background: white;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 15px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    }
+
+    button {
+        width: 100%;
+        padding: 15px;
+        margin: 7px 0;
+        border: none;
+        border-radius: 10px;
+        background: #222;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        opacity: 0.85;
+    }
+
+    .secondary {
+        background: #ddd;
+        color: #222;
+    }
+
+    .answer {
+        display: none;
+        margin-top: 15px;
+        padding: 15px;
+        background: #eee;
+        border-radius: 10px;
+    }
+
+    .question {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+
+    .score {
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .subject-title {
+        font-size: 25px;
+        margin-top: 0;
+    }
+</style>
 </head>
 
 <body>
+
+<header>
     <h1>📚 My Study Hub</h1>
-    <p>Tap a subject to start studying.</p>
+    <p>Study anywhere with one tap!</p>
+</header>
 
-    <button onclick="alert('Math reviewer coming soon!')">
-        🧮 Math
-    </button>
+<div class="container">
 
-    <button onclick="alert('Science reviewer coming soon!')">
-        🔬 Science
-    </button>
+    <!-- HOME -->
+    <div id="home" class="card">
+        <h2>Choose a subject</h2>
 
-    <button onclick="alert('AP reviewer coming soon!')">
-        🇵🇭 AP
-    </button>
+        <button onclick="showSubject('math')">
+            🧮 Math
+        </button>
+
+        <button onclick="showSubject('science')">
+            🔬 Science
+        </button>
+    </div>
+
+
+    <!-- MATH -->
+    <div id="math" class="card hidden">
+        <h2 class="subject-title">🧮 Math</h2>
+
+        <h3>Flashcards</h3>
+
+        <p><b>What is the quadratic formula?</b></p>
+
+        <button onclick="toggleAnswer('mathAnswer')">
+            Show Answer
+        </button>
+
+        <div id="mathAnswer" class="answer">
+            x = (-b ± √(b² - 4ac)) / 2a
+        </div>
+
+        <hr>
+
+        <h3>Quiz</h3>
+
+        <p class="question">
+            What is 12 × 12?
+        </p>
+
+        <button onclick="mathAnswer(144)">144</button>
+        <button onclick="mathAnswer(124)">124</button>
+        <button onclick="mathAnswer(132)">132</button>
+        <button onclick="mathAnswer(156)">156</button>
+
+        <p id="mathResult"></p>
+
+        <button class="secondary" onclick="goHome()">
+            ← Back
+        </button>
+    </div>
+
+
+    <!-- SCIENCE -->
+    <div id="science" class="card hidden">
+        <h2 class="subject-title">🔬 Science</h2>
+
+        <h3>Flashcards</h3>
+
+        <p><b>What is the basic unit of life?</b></p>
+
+        <button onclick="toggleAnswer('scienceAnswer')">
+            Show Answer
+        </button>
+
+        <div id="scienceAnswer" class="answer">
+            The cell.
+        </div>
+
+        <hr>
+
+        <h3>Quiz</h3>
+
+        <p class="question">
+            Which planet is known as the Red Planet?
+        </p>
+
+        <button onclick="scienceAnswer('Mars')">Mars</button>
+        <button onclick="scienceAnswer('Venus')">Venus</button>
+        <button onclick="scienceAnswer('Jupiter')">Jupiter</button>
+        <button onclick="scienceAnswer('Mercury')">Mercury</button>
+
+        <p id="scienceResult"></p>
+
+        <button class="secondary" onclick="goHome()">
+            ← Back
+        </button>
+    </div>
+
+</div>
+
+
+<script>
+
+function showSubject(subject) {
+    document.getElementById("home").classList.add("hidden");
+
+    if (subject === "math") {
+        document.getElementById("math").classList.remove("hidden");
+    }
+
+    if (subject === "science") {
+        document.getElementById("science").classList.remove("hidden");
+    }
+}
+
+function goHome() {
+    document.getElementById("math").classList.add("hidden");
+    document.getElementById("science").classList.add("hidden");
+    document.getElementById("home").classList.remove("hidden");
+}
+
+function toggleAnswer(id) {
+    const answer = document.getElementById(id);
+
+    if (answer.style.display === "block") {
+        answer.style.display = "none";
+    } else {
+        answer.style.display = "block";
+    }
+}
+
+function mathAnswer(answer) {
+    const result = document.getElementById("mathResult");
+
+    if (answer === 144) {
+        result.innerHTML = "✅ Correct!";
+    } else {
+        result.innerHTML = "❌ Try again!";
+    }
+}
+
+function scienceAnswer(answer) {
+    const result = document.getElementById("scienceResult");
+
+    if (answer === "Mars") {
+        result.innerHTML = "✅ Correct!";
+    } else {
+        result.innerHTML = "❌ Try again!";
+    }
+}
+
+</script>
+
 </body>
 </html>
