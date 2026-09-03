@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Study Hub</title>
+<title>LuckyRoll</title>
 
 <style>
 * {
@@ -13,101 +13,257 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #f4f6fb;
-    color: #222;
+    background:
+        radial-gradient(circle at top, #26345f 0%, #11152b 45%, #080a14 100%);
+    color: white;
+    min-height: 100vh;
 }
 
 header {
-    background: #222;
-    color: white;
     text-align: center;
-    padding: 25px 15px;
+    padding: 28px 15px 18px;
 }
 
-header h1 {
-    margin: 0;
-    font-size: 30px;
+.logo {
+    font-size: 38px;
+    font-weight: 900;
 }
 
-header p {
-    margin-bottom: 0;
+.subtitle {
+    color: #aeb8dd;
+    margin-top: 6px;
 }
 
 .container {
     max-width: 700px;
     margin: auto;
-    padding: 20px;
+    padding: 15px;
 }
 
-.card {
-    background: white;
-    border-radius: 15px;
+.panel {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 22px;
     padding: 20px;
     margin-bottom: 15px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    backdrop-filter: blur(10px);
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.stat {
+    background: rgba(255,255,255,0.07);
+    border-radius: 15px;
+    padding: 14px 5px;
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: #aeb8dd;
+    margin-top: 4px;
 }
 
 button {
     width: 100%;
-    padding: 15px;
-    margin: 7px 0;
     border: none;
-    border-radius: 10px;
-    background: #222;
-    color: white;
+    border-radius: 14px;
+    padding: 15px;
+    margin-top: 9px;
     font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
+    background: #ffffff;
+    color: #11152b;
+    transition: 0.2s;
 }
 
 button:hover {
-    opacity: 0.85;
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+.roll-button {
+    font-size: 20px;
+    padding: 18px;
 }
 
 .secondary {
-    background: #ddd;
-    color: #222;
-}
-
-.answer {
-    display: none;
-    margin-top: 15px;
-    padding: 15px;
-    background: #eee;
-    border-radius: 10px;
-}
-
-.question {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-.score {
-    font-size: 28px;
-    font-weight: bold;
-    text-align: center;
-    padding: 20px;
+    background: rgba(255,255,255,0.1);
+    color: white;
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
-.subject-title {
-    font-size: 25px;
+.result-card {
+    text-align: center;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.reward-icon {
+    font-size: 75px;
+    margin-bottom: 10px;
+}
+
+.reward-name {
+    font-size: 27px;
+    font-weight: 900;
+}
+
+.rarity {
+    margin-top: 8px;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.common {
+    color: #bfc7d9;
+}
+
+.uncommon {
+    color: #65e6a8;
+}
+
+.rare {
+    color: #66a8ff;
+}
+
+.epic {
+    color: #bd79ff;
+}
+
+.legendary {
+    color: #ffd45c;
+}
+
+.mythic {
+    color: #ff72c8;
+}
+
+.reveal {
+    animation: reveal 0.6s ease;
+}
+
+@keyframes reveal {
+    0% {
+        transform: scale(0.4) rotate(-8deg);
+        opacity: 0;
+    }
+
+    60% {
+        transform: scale(1.12) rotate(3deg);
+    }
+
+    100% {
+        transform: scale(1) rotate(0);
+        opacity: 1;
+    }
+}
+
+.collection-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.item {
+    background: rgba(255,255,255,0.06);
+    border-radius: 15px;
+    padding: 13px 5px;
+    text-align: center;
+    min-height: 105px;
+}
+
+.item-icon {
+    font-size: 34px;
+}
+
+.item-name {
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.item-count {
+    font-size: 11px;
+    color: #9da8d0;
+    margin-top: 3px;
+}
+
+.locked {
+    opacity: 0.3;
+    filter: grayscale(1);
+}
+
+.progress-bar {
+    height: 12px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: white;
+    transition: width 0.5s;
+}
+
+.section-title {
     margin-top: 0;
 }
 
-.result {
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 15px;
+.message {
+    text-align: center;
+    color: #aeb8dd;
+    min-height: 22px;
 }
 
-.progress {
+.streak {
     text-align: center;
-    margin-bottom: 15px;
-    color: #555;
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.big-streak {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.footer {
+    text-align: center;
+    color: #697398;
+    font-size: 12px;
+    padding: 15px;
+}
+
+@media (max-width: 450px) {
+    .logo {
+        font-size: 32px;
+    }
+
+    .collection-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 </style>
 </head>
@@ -115,134 +271,96 @@ button:hover {
 <body>
 
 <header>
-    <h1>📚 My Study Hub</h1>
-    <p>Study anywhere with one tap!</p>
+    <div class="logo">✨ LuckyRoll</div>
+    <div class="subtitle">Build your ultimate collection</div>
 </header>
 
 <div class="container">
 
-<!-- HOME -->
-<div id="home" class="card">
+    <!-- STATS -->
+    <div class="stats">
 
-    <h2>Choose a Subject</h2>
+        <div class="stat">
+            <div class="stat-number" id="rolls">0</div>
+            <div class="stat-label">ROLLS</div>
+        </div>
 
-    <button onclick="openSubject('math')">
-        🧮 Math
-    </button>
+        <div class="stat">
+            <div class="stat-number" id="bestStreak">0</div>
+            <div class="stat-label">BEST STREAK</div>
+        </div>
 
-    <button onclick="openSubject('science')">
-        🔬 Science
-    </button>
+        <div class="stat">
+            <div class="stat-number" id="collectionCount">0/12</div>
+            <div class="stat-label">COLLECTION</div>
+        </div>
 
-    <hr>
-
-    <button onclick="startRandom()">
-        🎲 Random Question
-    </button>
-
-</div>
-
-
-<!-- MATH -->
-<div id="math" class="card hidden">
-
-    <h2 class="subject-title">🧮 Math</h2>
-
-    <h3>🃏 Flashcards</h3>
-
-    <p><b id="mathFlashQuestion"></b></p>
-
-    <button onclick="showFlashAnswer('math')">
-        Show Answer
-    </button>
-
-    <div id="mathFlashAnswer" class="answer"></div>
-
-    <button onclick="nextFlashcard('math')">
-        🔄 Next Flashcard
-    </button>
-
-    <hr>
-
-    <h3>🎯 Quiz</h3>
-
-    <div id="mathQuiz"></div>
-
-    <button class="secondary" onclick="goHome()">
-        ← Back
-    </button>
-
-</div>
+    </div>
 
 
-<!-- SCIENCE -->
-<div id="science" class="card hidden">
+    <!-- GAME -->
+    <div class="panel">
 
-    <h2 class="subject-title">🔬 Science</h2>
+        <div class="result-card" id="result">
 
-    <h3>🃏 Flashcards</h3>
+            <div class="reward-icon">🎁</div>
 
-    <p><b id="scienceFlashQuestion"></b></p>
+            <div class="reward-name">
+                Ready?
+            </div>
 
-    <button onclick="showFlashAnswer('science')">
-        Show Answer
-    </button>
+            <div class="rarity">
+                Roll to discover something new!
+            </div>
 
-    <div id="scienceFlashAnswer" class="answer"></div>
+        </div>
 
-    <button onclick="nextFlashcard('science')">
-        🔄 Next Flashcard
-    </button>
+        <div class="streak">
+            🔥 Streak:
+            <span class="big-streak" id="streak">0</span>
+        </div>
 
-    <hr>
+        <button class="roll-button" onclick="roll()">
+            🎲 ROLL
+        </button>
 
-    <h3>🎯 Quiz</h3>
+        <p class="message" id="message"></p>
 
-    <div id="scienceQuiz"></div>
-
-    <button class="secondary" onclick="goHome()">
-        ← Back
-    </button>
-
-</div>
-
-
-<!-- RANDOM -->
-<div id="random" class="card hidden">
-
-    <h2>🎲 Random Question</h2>
-
-    <div class="progress" id="randomProgress"></div>
-
-    <p class="question" id="randomQuestion"></p>
-
-    <div id="randomChoices"></div>
-
-    <p class="result" id="randomResult"></p>
-
-    <button onclick="nextRandom()">
-        ➡️ Next Question
-    </button>
-
-    <button class="secondary" onclick="goHome()">
-        ← Back
-    </button>
-
-</div>
+    </div>
 
 
-<!-- SCORE -->
-<div id="score" class="card hidden">
+    <!-- COLLECTION -->
+    <div class="panel">
 
-    <h2>🏆 Quiz Complete!</h2>
+        <h2 class="section-title">📖 Collection</h2>
 
-    <div class="score" id="finalScore"></div>
+        <p>
+            <span id="progressText">0</span> / 12 discovered
+        </p>
 
-    <button onclick="goHome()">
-        🏠 Home
-    </button>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
 
-</div>
+        <br>
+
+        <div class="collection-grid" id="collection"></div>
+
+    </div>
+
+
+    <!-- RESET -->
+    <div class="panel">
+
+        <button class="secondary" onclick="resetGame()">
+            ♻️ Reset Progress
+        </button>
+
+    </div>
+
+    <div class="footer">
+        LuckyRoll • Your collection is saved on this device
+    </div>
 
 </div>
 
@@ -250,276 +368,232 @@ button:hover {
 <script>
 
 /* =========================
-   FLASHCARDS
+   REWARDS
 ========================= */
 
-const flashcards = {
+const rewards = [
 
-math: [
     {
-        q: "What is the quadratic formula?",
-        a: "x = (-b ± √(b² - 4ac)) / 2a"
+        name: "Tiny Star",
+        icon: "⭐",
+        rarity: "Common",
+        className: "common",
+        weight: 35
     },
-    {
-        q: "What is the formula for the area of a circle?",
-        a: "A = πr²"
-    },
-    {
-        q: "What is the Pythagorean theorem?",
-        a: "a² + b² = c²"
-    },
-    {
-        q: "What is the slope formula?",
-        a: "m = (y₂ - y₁) / (x₂ - x₁)"
-    },
-    {
-        q: "What is 12 × 12?",
-        a: "144"
-    }
-],
 
-science: [
     {
-        q: "What is the basic unit of life?",
-        a: "The cell."
+        name: "Blue Crystal",
+        icon: "💎",
+        rarity: "Common",
+        className: "common",
+        weight: 25
     },
+
     {
-        q: "Which planet is known as the Red Planet?",
-        a: "Mars."
+        name: "Lucky Leaf",
+        icon: "🍀",
+        rarity: "Uncommon",
+        className: "uncommon",
+        weight: 16
     },
+
     {
-        q: "What gas do plants absorb during photosynthesis?",
-        a: "Carbon dioxide (CO₂)."
+        name: "Golden Coin",
+        icon: "🪙",
+        rarity: "Uncommon",
+        className: "uncommon",
+        weight: 10
     },
+
     {
-        q: "What force pulls objects toward Earth?",
-        a: "Gravity."
+        name: "Magic Orb",
+        icon: "🔮",
+        rarity: "Rare",
+        className: "rare",
+        weight: 6
     },
+
     {
-        q: "What is DNA?",
-        a: "DNA is the molecule that contains genetic information."
+        name: "Ice Crown",
+        icon: "👑",
+        rarity: "Rare",
+        className: "rare",
+        weight: 3
+    },
+
+    {
+        name: "Phoenix",
+        icon: "🔥",
+        rarity: "Epic",
+        className: "epic",
+        weight: 2
+    },
+
+    {
+        name: "Moon Dragon",
+        icon: "🐉",
+        rarity: "Epic",
+        className: "epic",
+        weight: 1.3
+    },
+
+    {
+        name: "Galaxy Core",
+        icon: "🌌",
+        rarity: "Legendary",
+        className: "legendary",
+        weight: 0.5
+    },
+
+    {
+        name: "Cosmic Crown",
+        icon: "👑",
+        rarity: "Legendary",
+        className: "legendary",
+        weight: 0.2
+    },
+
+    {
+        name: "Void Dragon",
+        icon: "🐲",
+        rarity: "Mythic",
+        className: "mythic",
+        weight: 0.1
+    },
+
+    {
+        name: "Infinity",
+        icon: "♾️",
+        rarity: "Mythic",
+        className: "mythic",
+        weight: 0.05
     }
-]
+
+];
+
+
+/* =========================
+   SAVE DATA
+========================= */
+
+let data = JSON.parse(
+    localStorage.getItem("luckyRollData")
+) || {
+
+    rolls: 0,
+    streak: 0,
+    bestStreak: 0,
+    collection: {}
 
 };
 
-let flashIndex = {
-    math: 0,
-    science: 0
-};
 
+/* =========================
+   SAVE
+========================= */
 
-function loadFlashcard(subject) {
+function save() {
 
-    const card = flashcards[subject][flashIndex[subject]];
-
-    document.getElementById(subject + "FlashQuestion").innerText = card.q;
-
-    document.getElementById(subject + "FlashAnswer").innerText = card.a;
-
-    document.getElementById(subject + "FlashAnswer").style.display = "none";
-}
-
-
-function showFlashAnswer(subject) {
-
-    document.getElementById(subject + "FlashAnswer").style.display = "block";
-
-}
-
-
-function nextFlashcard(subject) {
-
-    flashIndex[subject]++;
-
-    if (flashIndex[subject] >= flashcards[subject].length) {
-        flashIndex[subject] = 0;
-    }
-
-    loadFlashcard(subject);
+    localStorage.setItem(
+        "luckyRollData",
+        JSON.stringify(data)
+    );
 
 }
 
 
 /* =========================
-   QUIZ QUESTIONS
+   PICK RANDOM REWARD
 ========================= */
 
-const quizzes = {
+function pickReward() {
 
-math: [
-    {
-        q: "What is 12 × 12?",
-        choices: ["124", "144", "132", "156"],
-        answer: "144"
-    },
+    let total = rewards.reduce(
+        (sum, reward) => sum + reward.weight,
+        0
+    );
 
-    {
-        q: "What is √49?",
-        choices: ["6", "7", "8", "9"],
-        answer: "7"
-    },
+    let random = Math.random() * total;
 
-    {
-        q: "What is 5²?",
-        choices: ["10", "15", "20", "25"],
-        answer: "25"
-    },
+    for (let reward of rewards) {
 
-    {
-        q: "What is 3 × 8?",
-        choices: ["18", "21", "24", "27"],
-        answer: "24"
-    },
+        random -= reward.weight;
 
-    {
-        q: "What is 100 ÷ 4?",
-        choices: ["20", "25", "30", "40"],
-        answer: "25"
+        if (random <= 0) {
+            return reward;
+        }
+
     }
-],
 
-science: [
-    {
-        q: "Which planet is known as the Red Planet?",
-        choices: ["Venus", "Mars", "Jupiter", "Mercury"],
-        answer: "Mars"
-    },
+    return rewards[0];
 
-    {
-        q: "What is the basic unit of life?",
-        choices: ["Atom", "Organ", "Cell", "Tissue"],
-        answer: "Cell"
-    },
-
-    {
-        q: "What gas do humans need for respiration?",
-        choices: ["Oxygen", "Carbon dioxide", "Nitrogen", "Hydrogen"],
-        answer: "Oxygen"
-    },
-
-    {
-        q: "What force keeps planets in orbit?",
-        choices: ["Friction", "Gravity", "Magnetism", "Electricity"],
-        answer: "Gravity"
-    },
-
-    {
-        q: "What organ pumps blood around the body?",
-        choices: ["Lung", "Brain", "Heart", "Kidney"],
-        answer: "Heart"
-    }
-]
-
-};
-
-
-let currentQuiz = {
-    subject: "",
-    index: 0,
-    score: 0
-};
-
-
-/* =========================
-   SUBJECT
-========================= */
-
-function openSubject(subject) {
-
-    document.getElementById("home").classList.add("hidden");
-
-    document.getElementById("math").classList.add("hidden");
-    document.getElementById("science").classList.add("hidden");
-
-    document.getElementById(subject).classList.remove("hidden");
-
-    loadFlashcard(subject);
-
-    startQuiz(subject);
 }
 
 
 /* =========================
-   QUIZ SYSTEM
+   ROLL
 ========================= */
 
-function startQuiz(subject) {
+function roll() {
 
-    currentQuiz.subject = subject;
-    currentQuiz.index = 0;
-    currentQuiz.score = 0;
+    const button =
+        document.querySelector(".roll-button");
 
-    showQuizQuestion();
+    button.disabled = true;
 
-}
+    const result =
+        document.getElementById("result");
 
+    result.classList.remove("reveal");
 
-function showQuizQuestion() {
-
-    const subject = currentQuiz.subject;
-
-    const questions = quizzes[subject];
-
-    if (currentQuiz.index >= questions.length) {
-
-        showScore();
-
-        return;
-    }
-
-    const q = questions[currentQuiz.index];
-
-    let html = "";
-
-    html += `<p class="progress">
-        Question ${currentQuiz.index + 1} of ${questions.length}
-    </p>`;
-
-    html += `<p class="question">${q.q}</p>`;
-
-    q.choices.forEach(choice => {
-
-        html += `
-        <button onclick="answerQuiz('${choice}')">
-            ${choice}
-        </button>
-        `;
-
-    });
-
-    html += `<p class="result" id="quizResult"></p>`;
-
-    document.getElementById(subject + "Quiz").innerHTML = html;
-
-}
-
-
-function answerQuiz(answer) {
-
-    const subject = currentQuiz.subject;
-
-    const question = quizzes[subject][currentQuiz.index];
-
-    const result = document.getElementById("quizResult");
-
-    if (answer === question.answer) {
-
-        currentQuiz.score++;
-
-        result.innerText = "✅ Correct!";
-
-    } else {
-
-        result.innerText = "❌ Incorrect!";
-
-    }
+    result.innerHTML = `
+        <div class="reward-icon">🎲</div>
+        <div class="reward-name">Rolling...</div>
+        <div class="rarity">✨</div>
+    `;
 
     setTimeout(() => {
 
-        currentQuiz.index++;
+        const reward = pickReward();
 
-        showQuizQuestion();
+        data.rolls++;
+
+        data.streak++;
+
+        if (data.streak > data.bestStreak) {
+            data.bestStreak = data.streak;
+        }
+
+        if (!data.collection[reward.name]) {
+            data.collection[reward.name] = 0;
+        }
+
+        data.collection[reward.name]++;
+
+        save();
+
+        result.classList.add("reveal");
+
+        result.innerHTML = `
+            <div class="reward-icon">
+                ${reward.icon}
+            </div>
+
+            <div class="reward-name">
+                ${reward.name}
+            </div>
+
+            <div class="rarity ${reward.className}">
+                ${reward.rarity}
+            </div>
+        `;
+
+        document.getElementById("message").innerText =
+            "✨ You discovered " + reward.name + "!";
+
+        update();
+
+        button.disabled = false;
 
     }, 700);
 
@@ -527,148 +601,131 @@ function answerQuiz(answer) {
 
 
 /* =========================
-   SCORE
+   UPDATE UI
 ========================= */
 
-function showScore() {
+function update() {
 
-    document.getElementById("math").classList.add("hidden");
-    document.getElementById("science").classList.add("hidden");
+    document.getElementById("rolls").innerText =
+        data.rolls;
 
-    document.getElementById("score").classList.remove("hidden");
+    document.getElementById("streak").innerText =
+        data.streak;
 
-    const total = quizzes[currentQuiz.subject].length;
+    document.getElementById("bestStreak").innerText =
+        data.bestStreak;
 
-    document.getElementById("finalScore").innerText =
-        currentQuiz.score + " / " + total;
+    const discovered =
+        rewards.filter(
+            reward => data.collection[reward.name]
+        ).length;
+
+    document.getElementById("collectionCount").innerText =
+        discovered + "/12";
+
+    document.getElementById("progressText").innerText =
+        discovered;
+
+    document.getElementById("progressFill").style.width =
+        (discovered / rewards.length * 100) + "%";
+
+    renderCollection();
 
 }
 
 
 /* =========================
-   RANDOM QUESTIONS
+   COLLECTION
 ========================= */
 
-let randomQuestions = [];
+function renderCollection() {
 
-let randomIndex = 0;
+    const container =
+        document.getElementById("collection");
 
-let randomScore = 0;
+    container.innerHTML = "";
 
+    rewards.forEach(reward => {
 
-function startRandom() {
+        const count =
+            data.collection[reward.name] || 0;
 
-    randomQuestions = [
+        const div =
+            document.createElement("div");
 
-        ...quizzes.math,
-        ...quizzes.science
+        div.className =
+            "item" + (count === 0 ? " locked" : "");
 
-    ];
+        div.innerHTML = `
 
-    randomQuestions.sort(() => Math.random() - 0.5);
+            <div class="item-icon">
+                ${count > 0 ? reward.icon : "❔"}
+            </div>
 
-    randomIndex = 0;
-    randomScore = 0;
+            <div class="item-name">
+                ${count > 0 ? reward.name : "Undiscovered"}
+            </div>
 
-    document.getElementById("home").classList.add("hidden");
+            <div class="item-count">
+                ${count > 0 ? "×" + count : "???"}
+            </div>
 
-    document.getElementById("random").classList.remove("hidden");
-
-    showRandomQuestion();
-
-}
-
-
-function showRandomQuestion() {
-
-    if (randomIndex >= randomQuestions.length) {
-
-        document.getElementById("randomQuestion").innerText =
-            "Finished!";
-
-        document.getElementById("randomChoices").innerHTML = "";
-
-        document.getElementById("randomResult").innerText =
-            "🏆 Score: " + randomScore + " / " + randomQuestions.length;
-
-        return;
-    }
-
-    const q = randomQuestions[randomIndex];
-
-    document.getElementById("randomProgress").innerText =
-        "Question " + (randomIndex + 1) +
-        " of " + randomQuestions.length;
-
-    document.getElementById("randomQuestion").innerText = q.q;
-
-    document.getElementById("randomResult").innerText = "";
-
-    let html = "";
-
-    q.choices.forEach(choice => {
-
-        html += `
-        <button onclick="answerRandom('${choice}')">
-            ${choice}
-        </button>
         `;
+
+        container.appendChild(div);
 
     });
 
-    document.getElementById("randomChoices").innerHTML = html;
-
 }
 
 
-function answerRandom(answer) {
+/* =========================
+   RESET
+========================= */
 
-    const q = randomQuestions[randomIndex];
+function resetGame() {
 
-    if (answer === q.answer) {
+    const confirmReset =
+        confirm(
+            "Reset your entire LuckyRoll collection?"
+        );
 
-        randomScore++;
+    if (!confirmReset) return;
 
-        document.getElementById("randomResult").innerText =
-            "✅ Correct!";
+    data = {
+        rolls: 0,
+        streak: 0,
+        bestStreak: 0,
+        collection: {}
+    };
 
-    } else {
+    save();
 
-        document.getElementById("randomResult").innerText =
-            "❌ Incorrect!";
+    document.getElementById("result").innerHTML = `
+        <div class="reward-icon">🎁</div>
+        <div class="reward-name">Ready?</div>
+        <div class="rarity">
+            Roll to discover something new!
+        </div>
+    `;
 
-    }
+    document.getElementById("message").innerText = "";
 
-}
-
-
-function nextRandom() {
-
-    randomIndex++;
-
-    showRandomQuestion();
+    update();
 
 }
 
 
 /* =========================
-   HOME
+   START
 ========================= */
 
-function goHome() {
+update();
 
-    document.getElementById("math").classList.add("hidden");
+</script>
 
-    document.getElementById("science").classList.add("hidden");
-
-    document.getElementById("random").classList.add("hidden");
-
-    document.getElementById("score").classList.add("hidden");
-
-    document.getElementById("home").classList.remove("hidden");
-
-}
-
+</body>
+</html>
 </script>
 
 </body>
