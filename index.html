@@ -6,97 +6,109 @@
 <title>My Study Hub</title>
 
 <style>
-    * {
-        box-sizing: border-box;
-    }
+* {
+    box-sizing: border-box;
+}
 
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: #f4f6fb;
-        color: #222;
-    }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6fb;
+    color: #222;
+}
 
-    header {
-        background: #222;
-        color: white;
-        text-align: center;
-        padding: 25px 15px;
-    }
+header {
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+}
 
-    header h1 {
-        margin: 0;
-        font-size: 30px;
-    }
+header h1 {
+    margin: 0;
+    font-size: 30px;
+}
 
-    header p {
-        margin-bottom: 0;
-    }
+header p {
+    margin-bottom: 0;
+}
 
-    .container {
-        max-width: 700px;
-        margin: auto;
-        padding: 20px;
-    }
+.container {
+    max-width: 700px;
+    margin: auto;
+    padding: 20px;
+}
 
-    .card {
-        background: white;
-        border-radius: 15px;
-        padding: 20px;
-        margin-bottom: 15px;
-        box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-    }
+.card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
 
-    button {
-        width: 100%;
-        padding: 15px;
-        margin: 7px 0;
-        border: none;
-        border-radius: 10px;
-        background: #222;
-        color: white;
-        font-size: 16px;
-        cursor: pointer;
-    }
+button {
+    width: 100%;
+    padding: 15px;
+    margin: 7px 0;
+    border: none;
+    border-radius: 10px;
+    background: #222;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
 
-    button:hover {
-        opacity: 0.85;
-    }
+button:hover {
+    opacity: 0.85;
+}
 
-    .secondary {
-        background: #ddd;
-        color: #222;
-    }
+.secondary {
+    background: #ddd;
+    color: #222;
+}
 
-    .answer {
-        display: none;
-        margin-top: 15px;
-        padding: 15px;
-        background: #eee;
-        border-radius: 10px;
-    }
+.answer {
+    display: none;
+    margin-top: 15px;
+    padding: 15px;
+    background: #eee;
+    border-radius: 10px;
+}
 
-    .question {
-        font-size: 20px;
-        font-weight: bold;
-        margin-bottom: 15px;
-    }
+.question {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
 
-    .score {
-        font-size: 24px;
-        font-weight: bold;
-        text-align: center;
-        padding: 20px;
-    }
+.score {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px;
+}
 
-    .hidden {
-        display: none;
-    }
+.hidden {
+    display: none;
+}
 
-    .subject-title {
-        font-size: 25px;
-        margin-top: 0;
-    }
+.subject-title {
+    font-size: 25px;
+    margin-top: 0;
+}
+
+.result {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.progress {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #555;
+}
 </style>
 </head>
 
@@ -109,150 +121,554 @@
 
 <div class="container">
 
-    <!-- HOME -->
-    <div id="home" class="card">
-        <h2>Choose a subject</h2>
+<!-- HOME -->
+<div id="home" class="card">
 
-        <button onclick="showSubject('math')">
-            🧮 Math
-        </button>
+    <h2>Choose a Subject</h2>
 
-        <button onclick="showSubject('science')">
-            🔬 Science
-        </button>
-    </div>
+    <button onclick="openSubject('math')">
+        🧮 Math
+    </button>
 
+    <button onclick="openSubject('science')">
+        🔬 Science
+    </button>
 
-    <!-- MATH -->
-    <div id="math" class="card hidden">
-        <h2 class="subject-title">🧮 Math</h2>
+    <hr>
 
-        <h3>Flashcards</h3>
+    <button onclick="startRandom()">
+        🎲 Random Question
+    </button>
 
-        <p><b>What is the quadratic formula?</b></p>
-
-        <button onclick="toggleAnswer('mathAnswer')">
-            Show Answer
-        </button>
-
-        <div id="mathAnswer" class="answer">
-            x = (-b ± √(b² - 4ac)) / 2a
-        </div>
-
-        <hr>
-
-        <h3>Quiz</h3>
-
-        <p class="question">
-            What is 12 × 12?
-        </p>
-
-        <button onclick="mathAnswer(144)">144</button>
-        <button onclick="mathAnswer(124)">124</button>
-        <button onclick="mathAnswer(132)">132</button>
-        <button onclick="mathAnswer(156)">156</button>
-
-        <p id="mathResult"></p>
-
-        <button class="secondary" onclick="goHome()">
-            ← Back
-        </button>
-    </div>
+</div>
 
 
-    <!-- SCIENCE -->
-    <div id="science" class="card hidden">
-        <h2 class="subject-title">🔬 Science</h2>
+<!-- MATH -->
+<div id="math" class="card hidden">
 
-        <h3>Flashcards</h3>
+    <h2 class="subject-title">🧮 Math</h2>
 
-        <p><b>What is the basic unit of life?</b></p>
+    <h3>🃏 Flashcards</h3>
 
-        <button onclick="toggleAnswer('scienceAnswer')">
-            Show Answer
-        </button>
+    <p><b id="mathFlashQuestion"></b></p>
 
-        <div id="scienceAnswer" class="answer">
-            The cell.
-        </div>
+    <button onclick="showFlashAnswer('math')">
+        Show Answer
+    </button>
 
-        <hr>
+    <div id="mathFlashAnswer" class="answer"></div>
 
-        <h3>Quiz</h3>
+    <button onclick="nextFlashcard('math')">
+        🔄 Next Flashcard
+    </button>
 
-        <p class="question">
-            Which planet is known as the Red Planet?
-        </p>
+    <hr>
 
-        <button onclick="scienceAnswer('Mars')">Mars</button>
-        <button onclick="scienceAnswer('Venus')">Venus</button>
-        <button onclick="scienceAnswer('Jupiter')">Jupiter</button>
-        <button onclick="scienceAnswer('Mercury')">Mercury</button>
+    <h3>🎯 Quiz</h3>
 
-        <p id="scienceResult"></p>
+    <div id="mathQuiz"></div>
 
-        <button class="secondary" onclick="goHome()">
-            ← Back
-        </button>
-    </div>
+    <button class="secondary" onclick="goHome()">
+        ← Back
+    </button>
+
+</div>
+
+
+<!-- SCIENCE -->
+<div id="science" class="card hidden">
+
+    <h2 class="subject-title">🔬 Science</h2>
+
+    <h3>🃏 Flashcards</h3>
+
+    <p><b id="scienceFlashQuestion"></b></p>
+
+    <button onclick="showFlashAnswer('science')">
+        Show Answer
+    </button>
+
+    <div id="scienceFlashAnswer" class="answer"></div>
+
+    <button onclick="nextFlashcard('science')">
+        🔄 Next Flashcard
+    </button>
+
+    <hr>
+
+    <h3>🎯 Quiz</h3>
+
+    <div id="scienceQuiz"></div>
+
+    <button class="secondary" onclick="goHome()">
+        ← Back
+    </button>
+
+</div>
+
+
+<!-- RANDOM -->
+<div id="random" class="card hidden">
+
+    <h2>🎲 Random Question</h2>
+
+    <div class="progress" id="randomProgress"></div>
+
+    <p class="question" id="randomQuestion"></p>
+
+    <div id="randomChoices"></div>
+
+    <p class="result" id="randomResult"></p>
+
+    <button onclick="nextRandom()">
+        ➡️ Next Question
+    </button>
+
+    <button class="secondary" onclick="goHome()">
+        ← Back
+    </button>
+
+</div>
+
+
+<!-- SCORE -->
+<div id="score" class="card hidden">
+
+    <h2>🏆 Quiz Complete!</h2>
+
+    <div class="score" id="finalScore"></div>
+
+    <button onclick="goHome()">
+        🏠 Home
+    </button>
+
+</div>
 
 </div>
 
 
 <script>
 
-function showSubject(subject) {
+/* =========================
+   FLASHCARDS
+========================= */
+
+const flashcards = {
+
+math: [
+    {
+        q: "What is the quadratic formula?",
+        a: "x = (-b ± √(b² - 4ac)) / 2a"
+    },
+    {
+        q: "What is the formula for the area of a circle?",
+        a: "A = πr²"
+    },
+    {
+        q: "What is the Pythagorean theorem?",
+        a: "a² + b² = c²"
+    },
+    {
+        q: "What is the slope formula?",
+        a: "m = (y₂ - y₁) / (x₂ - x₁)"
+    },
+    {
+        q: "What is 12 × 12?",
+        a: "144"
+    }
+],
+
+science: [
+    {
+        q: "What is the basic unit of life?",
+        a: "The cell."
+    },
+    {
+        q: "Which planet is known as the Red Planet?",
+        a: "Mars."
+    },
+    {
+        q: "What gas do plants absorb during photosynthesis?",
+        a: "Carbon dioxide (CO₂)."
+    },
+    {
+        q: "What force pulls objects toward Earth?",
+        a: "Gravity."
+    },
+    {
+        q: "What is DNA?",
+        a: "DNA is the molecule that contains genetic information."
+    }
+]
+
+};
+
+let flashIndex = {
+    math: 0,
+    science: 0
+};
+
+
+function loadFlashcard(subject) {
+
+    const card = flashcards[subject][flashIndex[subject]];
+
+    document.getElementById(subject + "FlashQuestion").innerText = card.q;
+
+    document.getElementById(subject + "FlashAnswer").innerText = card.a;
+
+    document.getElementById(subject + "FlashAnswer").style.display = "none";
+}
+
+
+function showFlashAnswer(subject) {
+
+    document.getElementById(subject + "FlashAnswer").style.display = "block";
+
+}
+
+
+function nextFlashcard(subject) {
+
+    flashIndex[subject]++;
+
+    if (flashIndex[subject] >= flashcards[subject].length) {
+        flashIndex[subject] = 0;
+    }
+
+    loadFlashcard(subject);
+
+}
+
+
+/* =========================
+   QUIZ QUESTIONS
+========================= */
+
+const quizzes = {
+
+math: [
+    {
+        q: "What is 12 × 12?",
+        choices: ["124", "144", "132", "156"],
+        answer: "144"
+    },
+
+    {
+        q: "What is √49?",
+        choices: ["6", "7", "8", "9"],
+        answer: "7"
+    },
+
+    {
+        q: "What is 5²?",
+        choices: ["10", "15", "20", "25"],
+        answer: "25"
+    },
+
+    {
+        q: "What is 3 × 8?",
+        choices: ["18", "21", "24", "27"],
+        answer: "24"
+    },
+
+    {
+        q: "What is 100 ÷ 4?",
+        choices: ["20", "25", "30", "40"],
+        answer: "25"
+    }
+],
+
+science: [
+    {
+        q: "Which planet is known as the Red Planet?",
+        choices: ["Venus", "Mars", "Jupiter", "Mercury"],
+        answer: "Mars"
+    },
+
+    {
+        q: "What is the basic unit of life?",
+        choices: ["Atom", "Organ", "Cell", "Tissue"],
+        answer: "Cell"
+    },
+
+    {
+        q: "What gas do humans need for respiration?",
+        choices: ["Oxygen", "Carbon dioxide", "Nitrogen", "Hydrogen"],
+        answer: "Oxygen"
+    },
+
+    {
+        q: "What force keeps planets in orbit?",
+        choices: ["Friction", "Gravity", "Magnetism", "Electricity"],
+        answer: "Gravity"
+    },
+
+    {
+        q: "What organ pumps blood around the body?",
+        choices: ["Lung", "Brain", "Heart", "Kidney"],
+        answer: "Heart"
+    }
+]
+
+};
+
+
+let currentQuiz = {
+    subject: "",
+    index: 0,
+    score: 0
+};
+
+
+/* =========================
+   SUBJECT
+========================= */
+
+function openSubject(subject) {
+
     document.getElementById("home").classList.add("hidden");
 
-    if (subject === "math") {
-        document.getElementById("math").classList.remove("hidden");
-    }
-
-    if (subject === "science") {
-        document.getElementById("science").classList.remove("hidden");
-    }
-}
-
-function goHome() {
     document.getElementById("math").classList.add("hidden");
     document.getElementById("science").classList.add("hidden");
+
+    document.getElementById(subject).classList.remove("hidden");
+
+    loadFlashcard(subject);
+
+    startQuiz(subject);
+}
+
+
+/* =========================
+   QUIZ SYSTEM
+========================= */
+
+function startQuiz(subject) {
+
+    currentQuiz.subject = subject;
+    currentQuiz.index = 0;
+    currentQuiz.score = 0;
+
+    showQuizQuestion();
+
+}
+
+
+function showQuizQuestion() {
+
+    const subject = currentQuiz.subject;
+
+    const questions = quizzes[subject];
+
+    if (currentQuiz.index >= questions.length) {
+
+        showScore();
+
+        return;
+    }
+
+    const q = questions[currentQuiz.index];
+
+    let html = "";
+
+    html += `<p class="progress">
+        Question ${currentQuiz.index + 1} of ${questions.length}
+    </p>`;
+
+    html += `<p class="question">${q.q}</p>`;
+
+    q.choices.forEach(choice => {
+
+        html += `
+        <button onclick="answerQuiz('${choice}')">
+            ${choice}
+        </button>
+        `;
+
+    });
+
+    html += `<p class="result" id="quizResult"></p>`;
+
+    document.getElementById(subject + "Quiz").innerHTML = html;
+
+}
+
+
+function answerQuiz(answer) {
+
+    const subject = currentQuiz.subject;
+
+    const question = quizzes[subject][currentQuiz.index];
+
+    const result = document.getElementById("quizResult");
+
+    if (answer === question.answer) {
+
+        currentQuiz.score++;
+
+        result.innerText = "✅ Correct!";
+
+    } else {
+
+        result.innerText = "❌ Incorrect!";
+
+    }
+
+    setTimeout(() => {
+
+        currentQuiz.index++;
+
+        showQuizQuestion();
+
+    }, 700);
+
+}
+
+
+/* =========================
+   SCORE
+========================= */
+
+function showScore() {
+
+    document.getElementById("math").classList.add("hidden");
+    document.getElementById("science").classList.add("hidden");
+
+    document.getElementById("score").classList.remove("hidden");
+
+    const total = quizzes[currentQuiz.subject].length;
+
+    document.getElementById("finalScore").innerText =
+        currentQuiz.score + " / " + total;
+
+}
+
+
+/* =========================
+   RANDOM QUESTIONS
+========================= */
+
+let randomQuestions = [];
+
+let randomIndex = 0;
+
+let randomScore = 0;
+
+
+function startRandom() {
+
+    randomQuestions = [
+
+        ...quizzes.math,
+        ...quizzes.science
+
+    ];
+
+    randomQuestions.sort(() => Math.random() - 0.5);
+
+    randomIndex = 0;
+    randomScore = 0;
+
+    document.getElementById("home").classList.add("hidden");
+
+    document.getElementById("random").classList.remove("hidden");
+
+    showRandomQuestion();
+
+}
+
+
+function showRandomQuestion() {
+
+    if (randomIndex >= randomQuestions.length) {
+
+        document.getElementById("randomQuestion").innerText =
+            "Finished!";
+
+        document.getElementById("randomChoices").innerHTML = "";
+
+        document.getElementById("randomResult").innerText =
+            "🏆 Score: " + randomScore + " / " + randomQuestions.length;
+
+        return;
+    }
+
+    const q = randomQuestions[randomIndex];
+
+    document.getElementById("randomProgress").innerText =
+        "Question " + (randomIndex + 1) +
+        " of " + randomQuestions.length;
+
+    document.getElementById("randomQuestion").innerText = q.q;
+
+    document.getElementById("randomResult").innerText = "";
+
+    let html = "";
+
+    q.choices.forEach(choice => {
+
+        html += `
+        <button onclick="answerRandom('${choice}')">
+            ${choice}
+        </button>
+        `;
+
+    });
+
+    document.getElementById("randomChoices").innerHTML = html;
+
+}
+
+
+function answerRandom(answer) {
+
+    const q = randomQuestions[randomIndex];
+
+    if (answer === q.answer) {
+
+        randomScore++;
+
+        document.getElementById("randomResult").innerText =
+            "✅ Correct!";
+
+    } else {
+
+        document.getElementById("randomResult").innerText =
+            "❌ Incorrect!";
+
+    }
+
+}
+
+
+function nextRandom() {
+
+    randomIndex++;
+
+    showRandomQuestion();
+
+}
+
+
+/* =========================
+   HOME
+========================= */
+
+function goHome() {
+
+    document.getElementById("math").classList.add("hidden");
+
+    document.getElementById("science").classList.add("hidden");
+
+    document.getElementById("random").classList.add("hidden");
+
+    document.getElementById("score").classList.add("hidden");
+
     document.getElementById("home").classList.remove("hidden");
+
 }
 
-function toggleAnswer(id) {
-    const answer = document.getElementById(id);
-
-    if (answer.style.display === "block") {
-        answer.style.display = "none";
-    } else {
-        answer.style.display = "block";
-    }
-}
-
-function mathAnswer(answer) {
-    const result = document.getElementById("mathResult");
-
-    if (answer === 144) {
-        result.innerHTML = "✅ Correct!";
-    } else {
-        result.innerHTML = "❌ Try again!";
-    }
-}
-
-function scienceAnswer(answer) {
-    const result = document.getElementById("scienceResult");
-
-    if (answer === "Mars") {
-        result.innerHTML = "✅ Correct!";
-    } else {
-        result.innerHTML = "❌ Try again!";
-    }
-}
-
-</script>
-
-</body>
-</html>
 </script>
 
 </body>
